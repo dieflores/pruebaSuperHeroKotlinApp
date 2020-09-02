@@ -2,6 +2,7 @@ package com.example.superheroprueba
 
 import android.content.Context
 import android.util.Log
+import androidx.lifecycle.LiveData
 import com.example.superheroprueba.Retrofit.ApiSuperHero
 import com.example.superheroprueba.Retrofit.RetrofitClient
 import com.example.superheroprueba.database.RoomDataBaseSuperHero
@@ -15,8 +16,12 @@ import retrofit2.Response
 class RepositorySuperHero(context: Context) {
 
     private val dataBase: RoomDataBaseSuperHero = RoomDataBaseSuperHero.getDatabase(context)
-    private val SuperHeroList = dataBase.getSuperHeroDao().getAllSuperHeroesList()
+    private val superHeroList = dataBase.getSuperHeroDao().getAllSuperHeroesList()
     private val tag = "SuperHero Repository"
+
+    fun getListFromRepository(): LiveData<List<SuperHero>> {
+        return superHeroList
+    }
 
     //  fun passLiveDataToViewModel() : LiveData<List<SuperHero>> {
     //  return SuperHeroList }
