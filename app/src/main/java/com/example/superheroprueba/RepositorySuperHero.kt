@@ -26,7 +26,7 @@ class RepositorySuperHero(context: Context) {
     //  fun passLiveDataToViewModel() : LiveData<List<SuperHero>> {
     //  return SuperHeroList }
 
-    //Lamada retrofit
+    //Llamada retrofit
 
     fun fetchDataFromServer() {
         val service: ApiSuperHero = RetrofitClient.retrofitInstance()
@@ -37,10 +37,13 @@ class RepositorySuperHero(context: Context) {
                 call: retrofit2.Call<List<SuperHero>>,
                 response: Response<List<SuperHero>>
             ) {
+                Log.d("REPOSITORY AQUI",response.body().toString())
+
                 CoroutineScope(Dispatchers.IO).launch {
                     response.body()?.let {
                         dataBase.getSuperHeroDao()
                             .insertAllSuperHero(it)
+
                     }
                 }
 

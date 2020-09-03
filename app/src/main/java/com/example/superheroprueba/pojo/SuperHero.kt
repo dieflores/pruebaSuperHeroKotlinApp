@@ -8,9 +8,9 @@ import com.google.gson.annotations.SerializedName
 @Entity(tableName = "superHero_table")
 data class SuperHero(
     @SerializedName("id")
-    @PrimaryKey val heroId: Int,
+    @PrimaryKey(autoGenerate = true) val heroId: Int,
     val name: String,
-    val powerStats: String,
+    @Embedded val powerstats: PowerStats,
     @Embedded val images: ImageSH
 ) {
 }

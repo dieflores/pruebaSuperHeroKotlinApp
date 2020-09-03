@@ -2,10 +2,12 @@ package com.example.superheroprueba.ui.main
 
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.superheroprueba.AdapterSuperHero
@@ -31,13 +33,16 @@ class MainFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         return inflater.inflate(R.layout.main_fragment, container, false)
+
     }
+
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         mViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         lista = ArrayList()
         mAdapterSuperHero = AdapterSuperHero(lista)
+        mViewModel.mTraerDatos()
 
         // mViewModel.getListFromViewModel()
         // sin livedata
@@ -47,9 +52,9 @@ class MainFragment : Fragment() {
         reciclerViewSuperHero.adapter = mAdapterSuperHero
         reciclerViewSuperHero.layoutManager = LinearLayoutManager(context)
         // con livedata
-        mViewModel.getListFromViewModel().observe(viewLifecycleOwner, {
+        mViewModel.getListFromViewModel().observe(viewLifecycleOwner, Observer {
+            Log.d("AQUI ESTA DATOS",it.toString())
             mAdapterSuperHero.updateData(it)
-        })
-    }
+        }) }
 
 }
