@@ -22,6 +22,7 @@ class AdapterSuperHero(var datasetSuperHero : List<SuperHero>): RecyclerView.Ada
         var nameSuperHero : TextView = itemView.name_superhero
         var idSuperHero : TextView = itemView.id_superhero
         var imageSuperHero : ImageView = itemView.image_superhero
+        var powerSuperHero : TextView = itemView.power_stats
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderSuperHero {
@@ -33,6 +34,7 @@ class AdapterSuperHero(var datasetSuperHero : List<SuperHero>): RecyclerView.Ada
         val hero =datasetSuperHero[position]
         holder.nameSuperHero.text=hero.name
         holder.idSuperHero.text=hero.heroId.toString()
+        holder.powerSuperHero.text=hero.powerstats.power.toString()
 
  // esto carga url del pojo hacia la imagen del holder (image view)
 
